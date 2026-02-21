@@ -1,5 +1,5 @@
 {
-  "name": "cephie-ui",
+  "name": "@cephie-studios/ui",
   "version": "1.0.0",
   "description": "A React component library compatible with Next.js",
   "license": "ISC",
@@ -43,6 +43,9 @@
     "url": "https://github.com/cephie-studios/ui/issues"
   },
   "homepage": "https://github.com/cephie-studios/ui#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
