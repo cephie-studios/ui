@@ -1,0 +1,9 @@
+# Bun configuration
+
+[install]
+# Use bun's module resolution
+optional = true
+
+[bundle]
+# Exclude react and react-dom from bundle (they should be peer dependencies)
+external = ["react", "react-dom"]

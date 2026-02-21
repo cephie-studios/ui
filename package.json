@@ -1,0 +1,63 @@
+{
+  "name": "cephie-ui",
+  "version": "1.0.0",
+  "description": "A React component library compatible with Next.js",
+  "license": "ISC",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./components/*": {
+      "types": "./dist/components/*.d.ts",
+      "import": "./dist/components/*.js",
+      "require": "./dist/components/*.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "bun run src/build.ts && tsc -p tsconfig.build.json",
+    "dev": "bun run src/build.ts --watch",
+    "prepublishOnly": "bun run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cephie-studios/ui.git"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "nextjs"
+  ],
+  "author": "Cephie Studios",
+  "bugs": {
+    "url": "https://github.com/cephie-studios/ui/issues"
+  },
+  "homepage": "https://github.com/cephie-studios/ui#readme",
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "esbuild": "^0.27.3",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest"
+  },
+  "dependencies": {
+    "path": "^0.12.7",
+    "url": "^0.11.4"
+  }
+}
