@@ -44,6 +44,3 @@ export default function MyComponent() {
   );
 }
 ```
-## License
-
-ISC
