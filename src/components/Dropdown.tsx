@@ -1,7 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { injectStyles } from '../inject';
-
-injectStyles();
 
 interface DropdownProps {
 	label?: string;

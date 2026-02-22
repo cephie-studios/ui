@@ -1,7 +1,4 @@
 import React from 'react';
-import { injectStyles } from '../inject';
-
-injectStyles();
 
 const variantClasses: Record<
 	'light' | 'dark',

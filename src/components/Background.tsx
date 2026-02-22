@@ -1,7 +1,4 @@
 import React from 'react';
-import { injectStyles } from '../inject';
-
-injectStyles();
 
 export default function Background({
 	className = '',

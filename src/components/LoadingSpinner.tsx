@@ -1,7 +1,4 @@
 import React from 'react';
-import { injectStyles } from '../inject';
-
-injectStyles();
 
 const sizeClasses: Record<'small' | 'medium' | 'large', string> = {
 	small: 'cephie-h-4 cephie-w-4 cephie-border-2',

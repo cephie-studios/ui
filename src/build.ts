@@ -24,6 +24,9 @@ async function build() {
       { stdio: 'inherit' }
     );
 
+    console.log('� Copying CSS to dist...');
+    await fs.copyFile(path.join(SRC, 'styles.css'), path.join(DIST, 'styles.css'));
+
     console.log('📦 Building ESM...');
     await esbuild.build({
       entryPoints: ['src/components/index.ts'],
@@ -33,7 +36,6 @@ async function build() {
       sourcemap: true,
       bundle: true,
       external: ['react', 'react-dom'],
-      loader: { '.css': 'text' },
     });
 
     console.log('📦 Building CommonJS...');
@@ -46,7 +48,6 @@ async function build() {
       sourcemap: true,
       bundle: true,
       external: ['react', 'react-dom'],
-      loader: { '.css': 'text' },
     });
 
     console.log('\nBuild complete!\n');
