@@ -1,5 +1,33 @@
 import React, { useState, useRef, useEffect } from 'react';
 
+const sizeClasses = {
+	xs: {
+		trigger: 'px-3 py-1.5 text-xs rounded-xl',
+		panel: 'rounded-xl',
+		option: 'px-3 py-1.5 text-xs rounded-lg'
+	},
+	sm: {
+		trigger: 'px-4 py-2 text-sm rounded-2xl',
+		panel: 'rounded-2xl',
+		option: 'px-4 py-2 text-sm rounded-xl'
+	},
+	md: {
+		trigger: 'px-6 py-3 text-sm rounded-2xl',
+		panel: 'rounded-2xl',
+		option: 'px-4 py-2.5 text-sm rounded-xl'
+	},
+	lg: {
+		trigger: 'px-8 py-4 text-base rounded-3xl',
+		panel: 'rounded-3xl',
+		option: 'px-6 py-3 text-base rounded-2xl'
+	},
+	xl: {
+		trigger: 'px-10 py-5 text-lg rounded-3xl',
+		panel: 'rounded-3xl',
+		option: 'px-6 py-3.5 text-lg rounded-2xl'
+	}
+} as const;
+
 interface DropdownProps {
 	label?: string;
 	icon?: React.ReactNode;
@@ -11,6 +39,7 @@ interface DropdownProps {
 	className?: string;
 	required?: boolean;
 	mode?: 'light' | 'dark';
+	size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export default function Dropdown({
@@ -23,8 +52,10 @@ export default function Dropdown({
 	id = '',
 	className = '',
 	required = false,
-	mode = 'dark'
+	mode = 'dark',
+	size = 'md'
 }: DropdownProps) {
+	const sizeStyle = sizeClasses[size];
 	const [isOpen, setIsOpen] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -87,7 +118,7 @@ export default function Dropdown({
 				<button
 					type="button"
 					onClick={() => setIsOpen(!isOpen)}
-					className={`w-full px-4 py-3 border rounded-xl outline-none transition-colors cursor-pointer flex items-center justify-between text-left text-sm ${
+					className={`w-full border outline-none transition-colors cursor-pointer flex items-center justify-between text-left ${sizeStyle.trigger} ${
 						mode === 'light'
 							? 'bg-zinc-50 border-zinc-200 text-zinc-900 focus:bg-white'
 							: 'bg-zinc-900 border-zinc-800 text-zinc-50 focus:bg-zinc-900'
@@ -117,7 +148,7 @@ export default function Dropdown({
 
 				{isOpen && (
 					<div
-						className={`absolute z-50 w-full mt-2 border rounded-2xl overflow-hidden ${
+						className={`absolute z-50 w-full mt-2 border overflow-hidden ${sizeStyle.panel} ${
 							mode === 'light'
 								? 'bg-white border-zinc-200 shadow-xl'
 								: 'bg-zinc-900 border-zinc-800 shadow-2xl backdrop-blur-xl'
@@ -137,7 +168,7 @@ export default function Dropdown({
 										onClick={() =>
 											handleSelect(option.value)
 										}
-										className={`w-full px-4 py-2.5 rounded-xl text-left transition-colors flex items-center justify-between text-sm border-0 cursor-pointer ${
+										className={`w-full text-left transition-colors flex items-center justify-between border-0 cursor-pointer ${sizeStyle.option} ${
 											isSelected
 												? mode === 'light'
 													? 'text-blue-600 bg-blue-50/50'

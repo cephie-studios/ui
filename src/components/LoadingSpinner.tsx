@@ -1,5 +1,3 @@
-import React from 'react';
-
 const sizeClasses: Record<'small' | 'medium' | 'large', string> = {
 	small: 'h-4 w-4 border-2',
 	medium: 'h-8 w-8 border-[3px]',
