@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/cephie-studios/ui#readme",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "peerDependencies": {
     "react": ">=16.8.0 <20.0.0",
