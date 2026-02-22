@@ -10,10 +10,10 @@ export default function Background({
 	return (
 		<div
 			aria-hidden="true"
-			className={`cephie-absolute cephie-inset-0 cephie-z-0 cephie-pointer-events-none cephie-flex cephie-items-center cephie-justify-center cephie-blur-3xl ${className}`}
+			className={`absolute inset-0 z-0 pointer-events-none flex items-center justify-center blur-3xl ${className}`}
 		>
 			<div
-				className="cephie-absolute cephie-left-1/2 cephie-top-0 -cephie-translate-x-1/2 cephie-rotate-[20deg] cephie-opacity-30"
+				className="absolute left-1/2 top-0 -translate-x-1/2 rotate-[20deg] opacity-30"
 				style={{
 					width: '60rem',
 					aspectRatio: '1200/700',

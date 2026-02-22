@@ -1,14 +1,14 @@
 import React from 'react';
 
 const sizeClasses: Record<'small' | 'medium' | 'large', string> = {
-	small: 'cephie-h-4 cephie-w-4 cephie-border-2',
-	medium: 'cephie-h-8 cephie-w-8 cephie-border-[3px]',
-	large: 'cephie-h-12 cephie-w-12 cephie-border-4'
+	small: 'h-4 w-4 border-2',
+	medium: 'h-8 w-8 border-[3px]',
+	large: 'h-12 w-12 border-4'
 };
 
 const modeClasses: Record<'light' | 'dark', string> = {
-	light: 'cephie-border-zinc-200 cephie-border-t-zinc-800',
-	dark: 'cephie-border-zinc-800 cephie-border-t-zinc-200'
+	light: 'border-zinc-200 border-t-zinc-800',
+	dark: 'border-zinc-800 border-t-zinc-200'
 };
 
 export default function LoadingSpinner({
@@ -19,9 +19,9 @@ export default function LoadingSpinner({
 	mode?: 'light' | 'dark';
 }) {
 	return (
-		<div className="cephie-flex cephie-items-center cephie-justify-center">
+		<div className="flex items-center justify-center">
 			<div
-				className={`cephie-animate-spin cephie-rounded-full cephie-border-solid ${sizeClasses[size]} ${modeClasses[mode]}`}
+				className={`animate-spin rounded-full border-solid ${sizeClasses[size]} ${modeClasses[mode]}`}
 			/>
 		</div>
 	);

@@ -22,6 +22,7 @@
     "build": "bun run src/build.ts && tsc -p tsconfig.build.json",
     "dev": "bun run src/build.ts --watch",
     "prepublishOnly": "bun run build",
+    "playground": "bun run build && cd playground && npm install && npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -55,9 +56,5 @@
     "react-dom": "latest",
     "tailwindcss": "3",
     "typescript": "latest"
-  },
-  "dependencies": {
-    "path": "^0.12.7",
-    "url": "^0.11.4"
   }
 }

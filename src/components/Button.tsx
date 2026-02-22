@@ -6,21 +6,21 @@ const variantClasses: Record<
 > = {
 	light: {
 		primary:
-			'cephie-bg-zinc-950 cephie-text-white hover:cephie-bg-zinc-800 focus-visible:cephie-outline-zinc-900',
+			'bg-zinc-950 text-white hover:bg-zinc-800 focus-visible:outline-zinc-900',
 		secondary:
-			'cephie-bg-zinc-200 cephie-text-zinc-900 hover:cephie-bg-zinc-300 focus-visible:cephie-outline-zinc-400',
+			'bg-zinc-200 text-zinc-900 hover:bg-zinc-300 focus-visible:outline-zinc-400',
 		success:
-			'cephie-bg-green-600 cephie-text-white hover:cephie-bg-green-700 focus-visible:cephie-outline-green-800',
-		danger: 'cephie-bg-red-600 cephie-text-white hover:cephie-bg-red-700 focus-visible:cephie-outline-red-800'
+			'bg-green-600 text-white hover:bg-green-700 focus-visible:outline-green-800',
+		danger: 'bg-red-600 text-white hover:bg-red-700 focus-visible:outline-red-800'
 	},
 	dark: {
 		primary:
-			'cephie-bg-zinc-50 cephie-text-zinc-950 hover:cephie-bg-zinc-200 focus-visible:cephie-outline-zinc-50',
+			'bg-zinc-50 text-zinc-950 hover:bg-zinc-200 focus-visible:outline-zinc-50',
 		secondary:
-			'cephie-bg-zinc-800 cephie-text-zinc-50 hover:cephie-bg-zinc-700 focus-visible:cephie-outline-zinc-700',
+			'bg-zinc-800 text-zinc-50 hover:bg-zinc-700 focus-visible:outline-zinc-700',
 		success:
-			'cephie-bg-green-600 cephie-text-white hover:cephie-bg-green-700 focus-visible:cephie-outline-green-800',
-		danger: 'cephie-bg-red-600 cephie-text-white hover:cephie-bg-red-700 focus-visible:cephie-outline-red-800'
+			'bg-green-600 text-white hover:bg-green-700 focus-visible:outline-green-800',
+		danger: 'bg-red-600 text-white hover:bg-red-700 focus-visible:outline-red-800'
 	}
 };
 
@@ -43,7 +43,7 @@ export default function Button({
 }) {
 	const content = (
 		<button
-			className={`cephie-rounded-2xl cephie-px-6 cephie-py-3 cephie-text-sm cephie-font-semibold cephie-shadow-sm focus-visible:cephie-outline-2 focus-visible:cephie-outline-offset-2 cephie-transition-colors cephie-duration-200 disabled:cephie-opacity-50 disabled:cephie-cursor-not-allowed cephie-border-0 cephie-cursor-pointer ${variantClasses[mode][variant]} ${className}`}
+			className={`rounded-2xl px-6 py-3 text-sm font-semibold shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed border-0 cursor-pointer ${variantClasses[mode][variant]} ${className}`}
 			style={style}
 			type={type}
 			disabled={disabled}

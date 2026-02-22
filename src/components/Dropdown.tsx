@@ -67,15 +67,15 @@ export default function Dropdown({
 	};
 
 	return (
-		<div className={`cephie-space-y-1.5 ${className}`} ref={dropdownRef}>
+		<div className={`space-y-1.5 ${className}`} ref={dropdownRef}>
 			{label && (
 				<label
 					htmlFor={id || name}
-					className="cephie-flex cephie-items-center cephie-text-xs cephie-font-bold cephie-uppercase cephie-tracking-wider cephie-text-zinc-500 cephie-ml-1"
+					className="flex items-center text-xs font-bold uppercase tracking-wider text-zinc-500 ml-1"
 				>
 					{icon && (
 						<span
-							className={`cephie-mr-2 ${mode === 'light' ? 'cephie-text-blue-500' : 'cephie-text-zinc-400'}`}
+							className={`mr-2 ${mode === 'light' ? 'text-blue-500' : 'text-zinc-400'}`}
 						>
 							{icon}
 						</span>
@@ -83,24 +83,24 @@ export default function Dropdown({
 					{label}
 				</label>
 			)}
-			<div className="cephie-relative">
+			<div className="relative">
 				<button
 					type="button"
 					onClick={() => setIsOpen(!isOpen)}
-					className={`cephie-w-full cephie-px-4 cephie-py-3 cephie-border cephie-rounded-xl focus:cephie-ring-2 cephie-outline-none cephie-transition-colors cephie-cursor-pointer cephie-flex cephie-items-center cephie-justify-between cephie-text-left cephie-text-sm ${
+					className={`w-full px-4 py-3 border rounded-xl focus:ring-2 outline-none transition-colors cursor-pointer flex items-center justify-between text-left text-sm ${
 						mode === 'light'
-							? 'cephie-bg-zinc-50 cephie-border-zinc-200 cephie-text-zinc-900 focus:cephie-ring-blue-500/20 focus:cephie-border-blue-500 focus:cephie-bg-white'
-							: 'cephie-bg-zinc-900/50 cephie-border-zinc-800 cephie-text-zinc-50 focus:cephie-ring-zinc-700 focus:cephie-border-zinc-600 focus:cephie-bg-zinc-900'
+							? 'bg-zinc-50 border-zinc-200 text-zinc-900 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white'
+							: 'bg-zinc-900 border-zinc-800 text-zinc-50 focus:ring-zinc-700 focus:border-zinc-600 focus:bg-zinc-900'
 					}`}
 					aria-haspopup="listbox"
 					aria-expanded={isOpen}
 				>
-					<span className="cephie-truncate">{displayLabel}</span>
+					<span className="truncate">{displayLabel}</span>
 					<div
-						className={`cephie-transition-transform cephie-duration-200 ${mode === 'light' ? 'cephie-text-zinc-400' : 'cephie-text-zinc-500'} ${isOpen ? 'cephie-rotate-180' : ''}`}
+						className={`transition-transform duration-200 ${mode === 'light' ? 'text-zinc-400' : 'text-zinc-500'} ${isOpen ? 'rotate-180' : ''}`}
 					>
 						<svg
-							className="cephie-w-4 cephie-h-4"
+							className="w-4 h-4"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -117,15 +117,15 @@ export default function Dropdown({
 
 				{isOpen && (
 					<div
-						className={`cephie-absolute cephie-z-50 cephie-w-full cephie-mt-2 cephie-border cephie-rounded-2xl cephie-overflow-hidden ${
+						className={`absolute z-50 w-full mt-2 border rounded-2xl overflow-hidden ${
 							mode === 'light'
-								? 'cephie-bg-white cephie-border-zinc-200 cephie-shadow-xl'
-								: 'cephie-bg-zinc-900 cephie-border-zinc-800 cephie-shadow-2xl cephie-backdrop-blur-xl'
+								? 'bg-white border-zinc-200 shadow-xl'
+								: 'bg-zinc-900 border-zinc-800 shadow-2xl backdrop-blur-xl'
 						}`}
 					>
 						<div
 							role="listbox"
-							className="cephie-py-1.5 cephie-px-1.5 cephie-max-h-60 cephie-overflow-y-auto"
+							className="py-1.5 px-1.5 max-h-60 overflow-y-auto"
 						>
 							{options.map((option) => {
 								const isSelected =
@@ -137,14 +137,14 @@ export default function Dropdown({
 										onClick={() =>
 											handleSelect(option.value)
 										}
-										className={`cephie-w-full cephie-px-4 cephie-py-2.5 cephie-rounded-xl cephie-text-left cephie-transition-colors cephie-flex cephie-items-center cephie-justify-between cephie-text-sm cephie-border-0 cephie-cursor-pointer ${
+										className={`w-full px-4 py-2.5 rounded-xl text-left transition-colors flex items-center justify-between text-sm border-0 cursor-pointer ${
 											isSelected
 												? mode === 'light'
-													? 'cephie-text-blue-600 cephie-bg-blue-50/50'
-													: 'cephie-text-zinc-50 cephie-bg-zinc-800'
+													? 'text-blue-600 bg-blue-50/50'
+													: 'text-zinc-50 bg-zinc-800'
 												: mode === 'light'
-													? 'cephie-text-zinc-700 hover:cephie-bg-zinc-50'
-													: 'cephie-text-zinc-400 hover:cephie-bg-zinc-800'
+													? 'text-zinc-700 hover:bg-zinc-50'
+													: 'text-zinc-400 hover:bg-zinc-800'
 										}`}
 										role="option"
 										aria-selected={isSelected}
@@ -152,7 +152,7 @@ export default function Dropdown({
 										{option.label}
 										{isSelected && (
 											<svg
-												className="cephie-w-3.5 cephie-h-3.5 cephie-shrink-0"
+												className="w-3.5 h-3.5 shrink-0"
 												fill="currentColor"
 												viewBox="0 0 20 20"
 											>
