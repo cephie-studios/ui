@@ -61,7 +61,7 @@ export default function NavbarContainer({
 	return (
 		<NavbarContext.Provider value={{ mode }}>
 			<nav
-				className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+				className={`fixed top-0 left-0 right-0 z-50 overflow-visible transition-all duration-300 ${
 					scrolled
 						? `${modeClasses[mode]} py-0`
 						: 'bg-transparent border-b border-transparent py-2'
@@ -294,7 +294,7 @@ export function NavbarUserMenu({
 
 			{open && (
 				<div
-					className={`absolute right-0 mt-2 w-48 rounded-2xl overflow-hidden animate-in fade-in zoom-in duration-200 py-1 px-1 ${
+					className={`absolute right-0 top-full z-[100] mt-2 w-48 rounded-2xl overflow-hidden animate-in fade-in zoom-in duration-200 py-1 px-1 ${
 						menuClasses[currentMode]
 					} ${menuClassName}`}
 				>
