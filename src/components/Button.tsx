@@ -1,28 +1,7 @@
 import React from 'react';
+import { injectStyles } from '../inject';
 
-const variantClasses: Record<
-	'light' | 'dark',
-	Record<'primary' | 'secondary' | 'success' | 'danger', string>
-> = {
-	light: {
-		primary:
-			'bg-zinc-950 text-white hover:bg-zinc-800 focus-visible:outline-zinc-900',
-		secondary:
-			'bg-zinc-200 text-zinc-900 hover:bg-zinc-300 focus-visible:outline-zinc-400',
-		success:
-			'bg-green-600 text-white hover:bg-green-700 focus-visible:outline-green-800',
-		danger: 'bg-red-600 text-white hover:bg-red-700 focus-visible:outline-red-800'
-	},
-	dark: {
-		primary:
-			'bg-zinc-50 text-zinc-950 hover:bg-zinc-200 focus-visible:outline-zinc-50',
-		secondary:
-			'bg-zinc-800 text-zinc-50 hover:bg-zinc-700 focus-visible:outline-zinc-700',
-		success:
-			'bg-green-600 text-white hover:bg-green-700 focus-visible:outline-green-800',
-		danger: 'bg-red-600 text-white hover:bg-red-700 focus-visible:outline-red-800'
-	}
-};
+injectStyles();
 
 export default function Button({
 	variant = 'primary',
@@ -41,9 +20,11 @@ export default function Button({
 	href?: string;
 	newTab?: boolean;
 }) {
+	const variantClass = `cephie-btn--${mode}-${variant}`;
+
 	const content = (
 		<button
-			className={`rounded-2xl px-6 py-3 text-sm font-semibold shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${variantClasses[mode][variant]} ${className}`}
+			className={`cephie-btn ${variantClass} ${className}`}
 			style={style}
 			type={type}
 			disabled={disabled}
@@ -59,7 +40,7 @@ export default function Button({
 				href={href}
 				target={newTab ? '_blank' : '_self'}
 				rel="noopener noreferrer"
-				className="contents"
+				style={{ display: 'contents' }}
 			>
 				{content}
 			</a>

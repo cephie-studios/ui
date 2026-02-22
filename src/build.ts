@@ -26,6 +26,7 @@ async function build() {
       sourcemap: true,
       bundle: true,
       external: ['react', 'react-dom'],
+      loader: { '.css': 'text' },
     });
 
     console.log('📦 Building CommonJS...');
@@ -38,6 +39,7 @@ async function build() {
       sourcemap: true,
       bundle: true,
       external: ['react', 'react-dom'],
+      loader: { '.css': 'text' },
     });
 
     console.log('\nBuild complete!\n');
