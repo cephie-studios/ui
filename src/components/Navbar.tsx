@@ -17,8 +17,8 @@ const modeClasses: Record<'light' | 'dark', string> = {
 };
 
 const menuClasses: Record<'light' | 'dark', string> = {
-	light: 'bg-white border border-zinc-200 shadow-xl ring-1 ring-zinc-900/5',
-	dark: 'bg-zinc-900 border border-zinc-800 shadow-2xl ring-1 ring-zinc-950/40'
+	light: 'bg-white border border-zinc-200 shadow-xl',
+	dark: 'bg-zinc-900 border border-zinc-800 shadow-xl'
 };
 
 const defaultIcons = {
@@ -231,9 +231,7 @@ export function NavbarUserMenu({
 	}, []);
 
 	const triggerClasses =
-		currentMode === 'dark'
-			? 'text-zinc-50 hover:bg-zinc-900'
-			: 'text-zinc-900 hover:bg-zinc-100';
+		currentMode === 'dark' ? 'hover:bg-zinc-900' : 'hover:bg-zinc-200';
 
 	const userNameClasses =
 		currentMode === 'dark'
@@ -243,7 +241,9 @@ export function NavbarUserMenu({
 	const chevronClasses =
 		currentMode === 'dark' ? 'text-zinc-400' : 'text-zinc-500';
 
-	const menuItemBaseClasses =
+	const menuLinkBaseClasses =
+		'flex items-center gap-3 px-4 py-2 rounded-xl text-sm transition-colors';
+	const menuButtonBaseClasses =
 		'flex items-center gap-3 w-full px-4 py-2 rounded-xl text-sm transition-colors text-left';
 	const menuItemDefaultClasses =
 		currentMode === 'dark'
@@ -294,58 +294,54 @@ export function NavbarUserMenu({
 
 			{open && (
 				<div
-					className={`absolute right-0 mt-2 w-48 rounded-2xl overflow-hidden animate-in fade-in zoom-in duration-200 ${
+					className={`absolute right-0 mt-2 w-48 rounded-2xl overflow-hidden animate-in fade-in zoom-in duration-200 py-1 px-1 ${
 						menuClasses[currentMode]
 					} ${menuClassName}`}
 				>
-					<div className="py-1 px-1">
-						{items.map((item) => {
-							if (item.href) {
-								return (
-									<a
-										key={item.label}
-										href={item.href}
-										target={
-											item.newTab ? '_blank' : '_self'
-										}
-										rel={
-											item.newTab
-												? 'noopener noreferrer'
-												: undefined
-										}
-										className={`${menuItemBaseClasses} ${
-											item.danger
-												? menuItemDangerClasses
-												: menuItemDefaultClasses
-										}`}
-										onClick={() => setOpen(false)}
-									>
-										{item.icon}
-										{item.label}
-									</a>
-								);
-							}
-
+					{items.map((item) => {
+						if (item.href) {
 							return (
-								<button
+								<a
 									key={item.label}
-									type="button"
-									onClick={() => {
-										setOpen(false);
-										item.onClick?.();
-									}}
-									className={`${menuItemBaseClasses} ${
+									href={item.href}
+									target={item.newTab ? '_blank' : '_self'}
+									rel={
+										item.newTab
+											? 'noopener noreferrer'
+											: undefined
+									}
+									className={`${menuLinkBaseClasses} ${
 										item.danger
 											? menuItemDangerClasses
 											: menuItemDefaultClasses
 									}`}
+									onClick={() => setOpen(false)}
 								>
 									{item.icon}
 									{item.label}
-								</button>
+								</a>
 							);
-						})}
-					</div>
+						}
+
+						return (
+							<button
+								key={item.label}
+								type="button"
+								onClick={() => {
+									setOpen(false);
+									item.onClick?.();
+								}}
+								className={`${menuButtonBaseClasses} ${
+									item.danger
+										? menuItemDangerClasses
+										: menuItemDefaultClasses
+								}`}
+							>
+								{item.icon}
+								{item.label}
+							</button>
+						);
+					})}
 				</div>
 			)}
 		</div>
