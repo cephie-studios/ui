@@ -13,6 +13,7 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org
+      - uses: oven-sh/setup-bun@v2
       - run: npm install && npm run build
       - run: npm publish --access public
         env:
@@ -29,6 +30,7 @@ jobs:
         with:
           node-version: 20
           registry-url: https://npm.pkg.github.com
+      - uses: oven-sh/setup-bun@v2
       - run: npm install && npm run build
       - run: npm publish
         env:
