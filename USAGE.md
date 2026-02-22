@@ -54,9 +54,12 @@ export default function Dashboard() {
 
 ## Next.js App Router Setup
 
+Import the stylesheet in your root layout. This must be done explicitly — styles are **not** injected automatically:
+
 ```tsx
 // app/layout.tsx
 import './globals.css';
+import '@cephie-studios/ui/styles.css'; // required
 
 export default function RootLayout({
   children,
@@ -69,6 +72,9 @@ export default function RootLayout({
     </html>
   );
 }
+```
+
+> **Tailwind v4 users:** Instead of importing `styles.css`, add `transpilePackages: ['@cephie-studios/ui']` to `next.config.ts`. This lets Tailwind v4 compile the component sources directly, avoiding any v3/v4 CSS conflicts.
 
 // app/page.tsx
 'use client';
@@ -95,23 +101,39 @@ import Button from 'cephie-ui/components/Button';
 
 ## Styling
 
-The components use Tailwind CSS classes. Make sure Tailwind CSS is installed and configured in your project:
+The components are styled with Tailwind CSS. The package ships a pre-built `styles.css` (compiled with Tailwind v3) that must be imported manually in your app entry:
 
-```bash
-npm install -D tailwindcss postcss autoprefixer
+```ts
+import '@cephie-studios/ui/styles.css';
 ```
 
-Then update your `tailwind.config.js`:
+### Tailwind v3 projects
+
+Make sure Tailwind is installed, then include the package output in your `content` list so any classes you pass via `className` props are also generated:
 
 ```js
+// tailwind.config.js
 export default {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
-    './node_modules/cephie-ui/**/*.js',
+    './node_modules/@cephie-studios/ui/dist/**/*.js',
   ],
-  theme: {
-    extend: {},
-  },
+  theme: { extend: {} },
   plugins: [],
 };
+```
+
+### Tailwind v4 projects
+
+Skip the `styles.css` import. Add `transpilePackages` to `next.config.ts` instead — Tailwind v4 will then scan and compile the component sources as part of your own build, preventing any v3/v4 conflicts:
+
+```ts
+// next.config.ts
+import type { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
+  transpilePackages: ['@cephie-studios/ui'],
+};
+
+export default nextConfig;
 ```

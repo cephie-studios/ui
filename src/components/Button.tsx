@@ -27,7 +27,7 @@ const variantClasses: Record<
 export default function Button({
 	variant = 'primary',
 	size = 'md',
-	mode = 'dark',
+	mode = 'light',
 	href,
 	newTab = false,
 	className = '',

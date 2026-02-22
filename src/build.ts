@@ -34,13 +34,6 @@ async function build() {
       external: ['react', 'react-dom'],
     });
 
-    const indexPath = path.join(DIST, 'index.js');
-    const indexContent = await fs.readFile(indexPath, 'utf-8');
-    await fs.writeFile(
-      indexPath,
-      "import './styles.css';\n\n" + indexContent
-    );
-
     console.log('Building CommonJS...');
     await esbuild.build({
       entryPoints: ['src/components/index.ts'],

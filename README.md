@@ -12,11 +12,13 @@ yarn add @cephie-studios/ui
 bun add @cephie-studios/ui
 ```
 
-When you import components (ESM), the library's styles are loaded automatically. If styles don't appear (e.g. with CommonJS or some bundlers), add this once in your app entry (e.g. `_app.tsx`, `layout.tsx`, or `main.tsx`):
+After installing, import the stylesheet **once** in your app entry point (e.g. `layout.tsx`, `_app.tsx`, or `main.tsx`). This is always required — styles are not injected automatically:
 
 ```ts
 import '@cephie-studios/ui/styles.css';
 ```
+
+> **Note for Tailwind v4 users:** The bundled `styles.css` is compiled with Tailwind v3. If your app uses Tailwind v4, you can skip the CSS import and instead add `transpilePackages: ['@cephie-studios/ui']` to your `next.config.ts` so Tailwind v4 scans and compiles the component sources directly.
 
 ## Usage
 

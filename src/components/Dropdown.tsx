@@ -52,7 +52,7 @@ export default function Dropdown({
 	id = '',
 	className = '',
 	required = false,
-	mode = 'dark',
+	mode = 'light',
 	size = 'md'
 }: DropdownProps) {
 	const sizeStyle = sizeClasses[size];
