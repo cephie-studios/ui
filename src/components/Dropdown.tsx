@@ -70,12 +70,15 @@ export default function Dropdown({
 	};
 
 	return (
-		<div className={`cephie-dd-wrapper ${className}`} ref={dropdownRef}>
+		<div className={`cephie-space-y-1.5 ${className}`} ref={dropdownRef}>
 			{label && (
-				<label htmlFor={id || name} className="cephie-dd-label">
+				<label
+					htmlFor={id || name}
+					className="cephie-flex cephie-items-center cephie-text-xs cephie-font-bold cephie-uppercase cephie-tracking-wider cephie-text-zinc-500 cephie-ml-1"
+				>
 					{icon && (
 						<span
-							className={`cephie-dd-label-icon cephie-dd-label-icon--${mode}`}
+							className={`cephie-mr-2 ${mode === 'light' ? 'cephie-text-blue-500' : 'cephie-text-zinc-400'}`}
 						>
 							{icon}
 						</span>
@@ -83,22 +86,24 @@ export default function Dropdown({
 					{label}
 				</label>
 			)}
-			<div className="cephie-dd-relative">
+			<div className="cephie-relative">
 				<button
 					type="button"
 					onClick={() => setIsOpen(!isOpen)}
-					className={`cephie-dd-trigger cephie-dd-trigger--${mode}`}
+					className={`cephie-w-full cephie-px-4 cephie-py-3 cephie-border cephie-rounded-xl focus:cephie-ring-2 cephie-outline-none cephie-transition-colors cephie-cursor-pointer cephie-flex cephie-items-center cephie-justify-between cephie-text-left cephie-text-sm ${
+						mode === 'light'
+							? 'cephie-bg-zinc-50 cephie-border-zinc-200 cephie-text-zinc-900 focus:cephie-ring-blue-500/20 focus:cephie-border-blue-500 focus:cephie-bg-white'
+							: 'cephie-bg-zinc-900/50 cephie-border-zinc-800 cephie-text-zinc-50 focus:cephie-ring-zinc-700 focus:cephie-border-zinc-600 focus:cephie-bg-zinc-900'
+					}`}
 					aria-haspopup="listbox"
 					aria-expanded={isOpen}
 				>
-					<span className="cephie-dd-trigger-text">
-						{displayLabel}
-					</span>
+					<span className="cephie-truncate">{displayLabel}</span>
 					<div
-						className={`cephie-dd-chevron cephie-dd-chevron--${mode}${isOpen ? ' cephie-dd-chevron--open' : ''}`}
+						className={`cephie-transition-transform cephie-duration-200 ${mode === 'light' ? 'cephie-text-zinc-400' : 'cephie-text-zinc-500'} ${isOpen ? 'cephie-rotate-180' : ''}`}
 					>
 						<svg
-							style={{ width: '1rem', height: '1rem' }}
+							className="cephie-w-4 cephie-h-4"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -114,8 +119,17 @@ export default function Dropdown({
 				</button>
 
 				{isOpen && (
-					<div className={`cephie-dd-list cephie-dd-list--${mode}`}>
-						<div role="listbox" className="cephie-dd-options">
+					<div
+						className={`cephie-absolute cephie-z-50 cephie-w-full cephie-mt-2 cephie-border cephie-rounded-2xl cephie-overflow-hidden ${
+							mode === 'light'
+								? 'cephie-bg-white cephie-border-zinc-200 cephie-shadow-xl'
+								: 'cephie-bg-zinc-900 cephie-border-zinc-800 cephie-shadow-2xl cephie-backdrop-blur-xl'
+						}`}
+					>
+						<div
+							role="listbox"
+							className="cephie-py-1.5 cephie-px-1.5 cephie-max-h-60 cephie-overflow-y-auto"
+						>
 							{options.map((option) => {
 								const isSelected =
 									String(option.value) === String(value);
@@ -126,14 +140,22 @@ export default function Dropdown({
 										onClick={() =>
 											handleSelect(option.value)
 										}
-										className={`cephie-dd-option cephie-dd-option--${mode}${isSelected ? ` cephie-dd-option--${mode}-selected` : ''}`}
+										className={`cephie-w-full cephie-px-4 cephie-py-2.5 cephie-rounded-xl cephie-text-left cephie-transition-colors cephie-flex cephie-items-center cephie-justify-between cephie-text-sm cephie-border-0 cephie-cursor-pointer ${
+											isSelected
+												? mode === 'light'
+													? 'cephie-text-blue-600 cephie-bg-blue-50/50'
+													: 'cephie-text-zinc-50 cephie-bg-zinc-800'
+												: mode === 'light'
+													? 'cephie-text-zinc-700 hover:cephie-bg-zinc-50'
+													: 'cephie-text-zinc-400 hover:cephie-bg-zinc-800'
+										}`}
 										role="option"
 										aria-selected={isSelected}
 									>
 										{option.label}
 										{isSelected && (
 											<svg
-												className="cephie-dd-check"
+												className="cephie-w-3.5 cephie-h-3.5 cephie-shrink-0"
 												fill="currentColor"
 												viewBox="0 0 20 20"
 											>

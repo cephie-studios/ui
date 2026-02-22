@@ -2,6 +2,7 @@ import * as esbuild from 'esbuild';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const ROOT = path.dirname(path.dirname(__filename));
@@ -16,6 +17,12 @@ async function build() {
       await fs.rm(DIST, { recursive: true, force: true });
     } catch {}
     await fs.mkdir(DIST, { recursive: true });
+
+    console.log('🎨 Compiling Tailwind CSS...');
+    execSync(
+      'bunx tailwindcss -i src/tailwind.css -o src/styles.css --minify --config tailwind.config.cjs',
+      { stdio: 'inherit' }
+    );
 
     console.log('📦 Building ESM...');
     await esbuild.build({

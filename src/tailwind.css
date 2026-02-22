@@ -1,0 +1,2 @@
+/* Tailwind utilities only — no base/reset so we don't pollute the consumer app */
+@tailwind utilities;
