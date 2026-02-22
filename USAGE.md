@@ -40,6 +40,8 @@ import {
   Navbar,
   NavbarBrand,
   NavbarInner,
+  NavbarLink,
+  NavbarButton,
   NavbarRow,
   NavbarUserMenu
 } from 'cephie-ui';
@@ -154,11 +156,13 @@ export default function LoadingState() {
 
 ## Navbar
 
-The navbar is modular. Use `Navbar` as the container, then compose it with helpers like `NavbarInner`, `NavbarRow`, `NavbarBrand`, and `NavbarUserMenu`.
+The navbar is modular. Use `Navbar` as the container, then compose it with helpers like `NavbarInner`, `NavbarRow`, `NavbarBrand`, `NavbarLink`, `NavbarButton`, and `NavbarUserMenu`.
 
 Props:
 - `Navbar`: `mode`, `className`
 - `NavbarBrand`: `title`, `href`, `iconLight`, `iconDark`, `iconAlt`, `iconSize`
+- `NavbarLink`: `href`, `newTab`, `mode`
+- `NavbarButton`: same props as `Button` (automatically applies `navbar` sizing)
 - `NavbarUserMenu`: `userName`, `userImage`, `items` (links or actions), `mode`
 
 ```tsx
@@ -167,8 +171,9 @@ import {
   NavbarInner,
   NavbarRow,
   NavbarBrand,
+  NavbarLink,
+  NavbarButton,
   NavbarUserMenu,
-  Button
 } from 'cephie-ui';
 
 export default function AppNavbar() {
@@ -178,12 +183,12 @@ export default function AppNavbar() {
         <NavbarRow>
           <NavbarBrand title="My Product" />
           <div className="hidden md:flex items-center gap-3">
-            <Button mode="dark" variant="secondary" href="/docs">
+            <NavbarLink href="/docs" mode="dark">
               Docs
-            </Button>
-            <Button mode="dark" href="/apply">
+            </NavbarLink>
+            <NavbarButton mode="dark" href="/apply">
               Apply
-            </Button>
+            </NavbarButton>
           </div>
           <NavbarUserMenu
             userName="Alex"
