@@ -1,4 +1,3 @@
-// @ts-ignore – bundled as a text string by esbuild (loader: { '.css': 'text' })
 import cssText from './styles.css';
 
 let injected = false;
