@@ -1,168 +1,176 @@
-import type { ReactNode } from 'react';
+import { createContext, useContext, type ReactNode } from 'react';
 
-export type FooterLink = {
+const modeClasses: Record<
+	'light' | 'dark',
+	{
+		footer: string;
+		heading: string;
+		text: string;
+		link: string;
+		divider: string;
+	}
+> = {
+	light: {
+		footer: 'bg-white border-t border-zinc-200',
+		heading: 'text-zinc-900',
+		text: 'text-zinc-600',
+		link: 'text-zinc-600 hover:text-zinc-900',
+		divider: 'border-zinc-200 text-zinc-500'
+	},
+	dark: {
+		footer: 'bg-zinc-950 border-t border-zinc-800',
+		heading: 'text-zinc-50',
+		text: 'text-zinc-400',
+		link: 'text-zinc-400 hover:text-zinc-50',
+		divider: 'border-zinc-800 text-zinc-400'
+	}
+};
+
+const defaultIcons = {
+	light: 'https://cephie.app/assets/icons/cephie-clean.avif',
+	dark: 'https://dash.cephie.app/assets/icons/cephie-clean-dark.avif'
+};
+
+type FooterContextValue = {
+	mode: 'light' | 'dark';
+	classes: typeof modeClasses.light;
+};
+
+const FooterContext = createContext<FooterContextValue>({
+	mode: 'light',
+	classes: modeClasses.light
+});
+
+type FooterProps = {
+	mode?: 'light' | 'dark';
+	title?: string;
+	subtitle?: string;
+	iconLight?: string;
+	iconDark?: string;
+	iconAlt?: string;
+	iconSize?: number;
+	children?: ReactNode;
+	bottomRight?: ReactNode;
+	copyright?: string;
+};
+
+export default function Footer({
+	mode = 'light',
+	title = 'Cephie Studios',
+	subtitle = 'Building tools that empower aviation communities.',
+	iconLight = defaultIcons.light,
+	iconDark = defaultIcons.dark,
+	iconAlt = 'Icon',
+	iconSize = 40,
+	children,
+	bottomRight,
+	copyright
+}: FooterProps) {
+	const classes = modeClasses[mode];
+	const iconSrc = mode === 'dark' ? iconDark : iconLight;
+	const year = new Date().getFullYear();
+	const footerBottomRight = bottomRight ?? `Designed and built by ${title}.`;
+	const footerCopyright =
+		copyright ?? `© ${year} ${title}. All rights reserved.`;
+
+	return (
+		<FooterContext.Provider value={{ mode, classes }}>
+			<footer className={classes.footer}>
+				<div className="max-w-7xl mx-auto px-6 py-12">
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+						<div>
+							<div className="flex items-center mb-4">
+								<img
+									src={iconSrc}
+									alt={iconAlt}
+									width={iconSize}
+									height={iconSize}
+									className="inline-block mr-1"
+								/>
+								<h3
+									className={`font-semibold font-montserrat ${classes.heading}`}
+								>
+									{title}
+								</h3>
+							</div>
+							<p
+								className={`text-sm font-montserrat ${classes.text}`}
+							>
+								{subtitle}
+							</p>
+						</div>
+
+						<div></div>
+
+						{children}
+					</div>
+
+					<div
+						className={`mt-10 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4 ${classes.divider}`}
+					>
+						<p className="text-xs font-montserrat">
+							{footerCopyright}
+						</p>
+						<div className="text-xs font-montserrat">
+							{footerBottomRight}
+						</div>
+					</div>
+				</div>
+			</footer>
+		</FooterContext.Provider>
+	);
+}
+
+type FooterLinkHeaderProps = {
+	title: string;
+	children?: ReactNode;
+	className?: string;
+};
+
+export function FooterLinkHeader({
+	title,
+	children,
+	className = ''
+}: FooterLinkHeaderProps) {
+	const { classes } = useContext(FooterContext);
+
+	return (
+		<div className={className}>
+			<h4
+				className={`text-sm font-semibold font-montserrat mb-3 ${classes.heading}`}
+			>
+				{title}
+			</h4>
+			<ul className="space-y-2 text-sm">{children}</ul>
+		</div>
+	);
+}
+
+type FooterLinkProps = {
 	href: string;
-	label: string;
+	children: ReactNode;
 	newTab?: boolean;
 	className?: string;
 };
 
-export type FooterSection = {
-	title: string;
-	links: FooterLink[];
-};
-
-export type FooterBrand = {
-	name: string;
-	href?: string;
-	logoSrc: string;
-	logoAlt?: string;
-	logoWidth?: number;
-	logoHeight?: number;
-};
-
-export type FooterProps = {
-	brand: FooterBrand;
-	description?: string;
-	sections?: FooterSection[];
-	variant?: 'light' | 'dark';
-	includeSpacerColumn?: boolean;
-	bottomLeft?: ReactNode;
-	bottomRight?: ReactNode;
-	className?: string;
-	containerClassName?: string;
-};
-
-const defaultLogoSize = {
-	width: 40,
-	height: 40
-};
-
-export default function Footer({
-	brand,
-	description,
-	sections = [],
-	variant = 'light',
-	includeSpacerColumn = false,
-	bottomLeft,
-	bottomRight,
-	className = '',
-	containerClassName = ''
-}: FooterProps) {
-	const isDark = variant === 'dark';
-	const textPrimary = isDark ? 'text-zinc-50' : 'text-zinc-900';
-	const textSecondary = isDark ? 'text-zinc-400' : 'text-zinc-600';
-	const borderColor = isDark ? 'border-zinc-800' : 'border-zinc-200';
-	const bgColor = isDark ? 'bg-zinc-950' : 'bg-white';
-
-	const columnCount = 1 + (includeSpacerColumn ? 1 : 0) + sections.length;
-	const gridCols =
-		columnCount >= 5
-			? 'lg:grid-cols-5'
-			: columnCount === 4
-				? 'lg:grid-cols-4'
-				: columnCount === 3
-					? 'lg:grid-cols-3'
-					: 'lg:grid-cols-2';
-
-	const logoWidth = brand.logoWidth ?? defaultLogoSize.width;
-	const logoHeight = brand.logoHeight ?? defaultLogoSize.height;
-	const year = new Date().getFullYear();
+export function FooterLink({
+	href,
+	children,
+	newTab = false,
+	className = ''
+}: FooterLinkProps) {
+	const { classes } = useContext(FooterContext);
 
 	return (
-		<footer className={`${bgColor} border-t ${borderColor} ${className}`}>
-			<div
-				className={`max-w-7xl mx-auto px-6 py-12 ${containerClassName}`}
+		<li>
+			<a
+				href={href}
+				target={newTab ? '_blank' : '_self'}
+				rel={newTab ? 'noopener noreferrer' : undefined}
+				className={`font-montserrat ${classes.link} ${className}`}
 			>
-				<div
-					className={`grid grid-cols-1 sm:grid-cols-2 ${gridCols} gap-8`}
-				>
-					<div>
-						<div className="flex items-center mb-4">
-							<img
-								src={brand.logoSrc}
-								alt={brand.logoAlt ?? 'Icon'}
-								width={logoWidth}
-								height={logoHeight}
-								className="inline-block mr-1"
-							/>
-							{brand.href ? (
-								<a
-									href={brand.href}
-									className={`font-semibold font-montserrat ${textPrimary}`}
-								>
-									{brand.name}
-								</a>
-							) : (
-								<h3
-									className={`font-semibold font-montserrat ${textPrimary}`}
-								>
-									{brand.name}
-								</h3>
-							)}
-						</div>
-						{description && (
-							<p
-								className={`text-sm font-montserrat ${textSecondary}`}
-							>
-								{description}
-							</p>
-						)}
-					</div>
-
-					{includeSpacerColumn && <div />}
-
-					{sections.map((section) => (
-						<div key={section.title}>
-							<h4
-								className={`text-sm font-semibold font-montserrat mb-3 ${textPrimary}`}
-							>
-								{section.title}
-							</h4>
-							<ul className="space-y-2 text-sm">
-								{section.links.map((link) => {
-									const isExternal =
-										link.newTab ||
-										/^https?:\/\//.test(link.href);
-
-									return (
-										<li key={link.href}>
-											<a
-												href={link.href}
-												className={`font-montserrat ${textSecondary} ${link.className ?? ''}`}
-												target={
-													isExternal
-														? '_blank'
-														: undefined
-												}
-												rel={
-													isExternal
-														? 'noopener noreferrer'
-														: undefined
-												}
-											>
-												{link.label}
-											</a>
-										</li>
-									);
-								})}
-							</ul>
-						</div>
-					))}
-				</div>
-
-				<div
-					className={`mt-10 pt-6 border-t ${borderColor} flex flex-col sm:flex-row items-center justify-between gap-4`}
-				>
-					<div className={`text-xs font-montserrat ${textSecondary}`}>
-						{bottomLeft ??
-							`© ${year} ${brand.name}. All rights reserved.`}
-					</div>
-					<div className={`text-xs font-montserrat ${textSecondary}`}>
-						{bottomRight ?? 'Designed and built by Cephie Studios.'}
-					</div>
-				</div>
-			</div>
-		</footer>
+				{children}
+			</a>
+		</li>
 	);
 }
