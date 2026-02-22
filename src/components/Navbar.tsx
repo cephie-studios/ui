@@ -230,9 +230,6 @@ export function NavbarUserMenu({
 			document.removeEventListener('mousedown', handleClickOutside);
 	}, []);
 
-	const triggerClasses =
-		currentMode === 'dark' ? 'hover:bg-zinc-900' : 'hover:bg-zinc-200';
-
 	const userNameClasses =
 		currentMode === 'dark'
 			? 'text-sm font-medium text-zinc-50 font-montserrat'
@@ -259,7 +256,7 @@ export function NavbarUserMenu({
 			<button
 				type="button"
 				onClick={() => setOpen(!open)}
-				className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-colors duration-200 ${triggerClasses} ${buttonClassName}`}
+				className={`flex items-center gap-2 px-3 py-2 rounded-xl ${buttonClassName}`}
 			>
 				<span className="flex items-center gap-2">
 					{userImage && (
@@ -294,7 +291,7 @@ export function NavbarUserMenu({
 
 			{open && (
 				<div
-					className={`absolute right-0 top-full z-[100] mt-2 w-48 rounded-2xl overflow-hidden animate-in fade-in zoom-in duration-200 py-1 px-1 ${
+					className={`absolute right-0 top-full z-100 mt-2 w-48 rounded-2xl overflow-hidden animate-in fade-in zoom-in duration-200 py-1 px-1 ${
 						menuClasses[currentMode]
 					} ${menuClassName}`}
 				>
