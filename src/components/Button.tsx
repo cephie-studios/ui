@@ -49,7 +49,7 @@ export default function Button({
 				size === 'xs'
 					? 'px-3 py-1.5 text-xs rounded-xl'
 					: size === 'sm'
-						? 'px-4 py-2 text-sm rounded-2xl'
+						? 'px-4 py-2 text-xs rounded-2xl'
 						: size === 'md'
 							? 'px-6 py-3 text-sm rounded-2xl'
 							: size === 'lg'
