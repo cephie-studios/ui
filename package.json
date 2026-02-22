@@ -1,6 +1,6 @@
 {
   "name": "@cephie-studios/ui",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A React component library compatible with Next.js",
   "license": "ISC",
   "type": "module",
