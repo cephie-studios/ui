@@ -1,5 +1,6 @@
 # .github/workflows/publish.yml
-name: Publish
+# Fallback: manually created releases will also trigger publish
+name: Publish (manual release)
 on:
   release:
     types: [created]
@@ -32,6 +33,6 @@ jobs:
           registry-url: https://npm.pkg.github.com
       - uses: oven-sh/setup-bun@v2
       - run: npm install && npm run build
-      - run: npm publish
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
