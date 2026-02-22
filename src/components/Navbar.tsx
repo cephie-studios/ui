@@ -67,33 +67,39 @@ export default function NavbarContainer({
 						: 'bg-transparent border-b border-transparent py-2'
 				} ${className}`}
 			>
-				{children}
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="flex justify-between items-center h-16">
+						{children}
+					</div>
+				</div>
 			</nav>
 		</NavbarContext.Provider>
 	);
 }
 
-type NavbarInnerProps = {
+type NavbarLeftProps = {
 	children?: ReactNode;
 	className?: string;
 };
 
-export function NavbarInner({ children, className = '' }: NavbarInnerProps) {
+export function NavbarLeft({ children, className = '' }: NavbarLeftProps) {
 	return (
-		<div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>
+		<div className={`flex items-center ${className}`}>
 			{children}
 		</div>
 	);
 }
 
-type NavbarRowProps = {
+type NavbarRightProps = {
 	children?: ReactNode;
 	className?: string;
 };
 
-export function NavbarRow({ children, className = '' }: NavbarRowProps) {
+export function NavbarRight({ children, className = '' }: NavbarRightProps) {
 	return (
-		<div className={`flex justify-between items-center h-16 ${className}`}>
+		<div
+			className={`hidden md:flex items-center space-x-8 ${className}`}
+		>
 			{children}
 		</div>
 	);

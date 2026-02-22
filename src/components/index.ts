@@ -4,8 +4,8 @@ export { default as LoadingSpinner } from './LoadingSpinner';
 export { default as Background } from './Background';
 export {
 	default as Navbar,
-	NavbarInner,
-	NavbarRow,
+	NavbarLeft,
+	NavbarRight,
 	NavbarBrand,
 	NavbarUserMenu,
 	NavbarLink,

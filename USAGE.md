@@ -38,11 +38,11 @@ import {
   FooterLinkHeader,
   LoadingSpinner,
   Navbar,
+  NavbarLeft,
+  NavbarRight,
   NavbarBrand,
-  NavbarInner,
   NavbarLink,
   NavbarButton,
-  NavbarRow,
   NavbarUserMenu
 } from 'cephie-ui';
 ```
@@ -156,10 +156,12 @@ export default function LoadingState() {
 
 ## Navbar
 
-The navbar is modular. Use `Navbar` as the container, then compose it with helpers like `NavbarInner`, `NavbarRow`, `NavbarBrand`, `NavbarLink`, `NavbarButton`, and `NavbarUserMenu`.
+Single row like the dashboard: brand on the left, links/actions on the right. `Navbar` wraps everything (fixed bar + inner max-width + flex row). Put `NavbarLeft` and `NavbarRight` as direct children.
 
 Props:
 - `Navbar`: `mode`, `className`
+- `NavbarLeft`: `className` — left side, `flex items-center` (wrap `NavbarBrand` here)
+- `NavbarRight`: `className` — right side, `hidden md:flex items-center space-x-8`
 - `NavbarBrand`: `title`, `href`, `iconLight`, `iconDark`, `iconAlt`, `iconSize`
 - `NavbarLink`: `href`, `newTab`, `mode`
 - `NavbarButton`: same props as `Button` (automatically applies `navbar` sizing)
@@ -168,8 +170,8 @@ Props:
 ```tsx
 import {
   Navbar,
-  NavbarInner,
-  NavbarRow,
+  NavbarLeft,
+  NavbarRight,
   NavbarBrand,
   NavbarLink,
   NavbarButton,
@@ -179,17 +181,17 @@ import {
 export default function AppNavbar() {
   return (
     <Navbar mode="dark">
-      <NavbarInner>
-        <NavbarRow>
-          <NavbarBrand title="My Product" />
-          <div className="hidden md:flex items-center gap-3">
-            <NavbarLink href="/docs" mode="dark">
-              Docs
-            </NavbarLink>
-            <NavbarButton mode="dark" href="/apply">
-              Apply
-            </NavbarButton>
-          </div>
+      <NavbarLeft>
+        <NavbarBrand title="My Product" />
+      </NavbarLeft>
+      <NavbarRight>
+        <NavbarLink href="/docs" mode="dark">
+          Docs
+        </NavbarLink>
+        <div className="flex gap-2">
+          <NavbarButton mode="dark" href="/apply">
+            Apply
+          </NavbarButton>
           <NavbarUserMenu
             userName="Alex"
             userImage="https://example.com/avatar.png"
@@ -199,8 +201,8 @@ export default function AppNavbar() {
               { label: 'Sign out', onClick: () => {}, danger: true }
             ]}
           />
-        </NavbarRow>
-      </NavbarInner>
+        </div>
+      </NavbarRight>
     </Navbar>
   );
 }
