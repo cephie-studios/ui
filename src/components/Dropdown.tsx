@@ -87,10 +87,10 @@ export default function Dropdown({
 				<button
 					type="button"
 					onClick={() => setIsOpen(!isOpen)}
-					className={`w-full px-4 py-3 border rounded-xl focus:ring-2 outline-none transition-colors cursor-pointer flex items-center justify-between text-left text-sm ${
+					className={`w-full px-4 py-3 border rounded-xl outline-none transition-colors cursor-pointer flex items-center justify-between text-left text-sm ${
 						mode === 'light'
-							? 'bg-zinc-50 border-zinc-200 text-zinc-900 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white'
-							: 'bg-zinc-900 border-zinc-800 text-zinc-50 focus:ring-zinc-700 focus:border-zinc-600 focus:bg-zinc-900'
+							? 'bg-zinc-50 border-zinc-200 text-zinc-900 focus:bg-white'
+							: 'bg-zinc-900 border-zinc-800 text-zinc-50 focus:bg-zinc-900'
 					}`}
 					aria-haspopup="listbox"
 					aria-expanded={isOpen}
@@ -143,7 +143,7 @@ export default function Dropdown({
 													? 'text-blue-600 bg-blue-50/50'
 													: 'text-zinc-50 bg-zinc-800'
 												: mode === 'light'
-													? 'text-zinc-700 hover:bg-zinc-50'
+													? 'text-zinc-700 hover:bg-zinc-200'
 													: 'text-zinc-400 hover:bg-zinc-800'
 										}`}
 										role="option"
