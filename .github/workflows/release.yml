@@ -68,6 +68,8 @@ jobs:
           scope: '@cephie-studios'
       - uses: oven-sh/setup-bun@v2
       - run: npm install && npm run build
+      - name: Set package name for GitHub Packages scope
+        run: node -e "const p=require('./package.json'); p.name='@cephie-studios/ui'; require('fs').writeFileSync('package.json', JSON.stringify(p,null,2));"
       - run: npm publish --access public --registry https://npm.pkg.github.com
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
