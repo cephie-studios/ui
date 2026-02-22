@@ -14,7 +14,7 @@ async function build() {
 
     try {
       await fs.rm(DIST, { recursive: true, force: true });
-    } catch {}
+    } catch { }
     await fs.mkdir(DIST, { recursive: true });
 
     console.log('Generating CSS...');
@@ -33,6 +33,13 @@ async function build() {
       bundle: true,
       external: ['react', 'react-dom'],
     });
+
+    const indexPath = path.join(DIST, 'index.js');
+    const indexContent = await fs.readFile(indexPath, 'utf-8');
+    await fs.writeFile(
+      indexPath,
+      "import './styles.css';\n\n" + indexContent
+    );
 
     console.log('Building CommonJS...');
     await esbuild.build({

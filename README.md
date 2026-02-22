@@ -5,11 +5,17 @@ A production-ready React component library built with TypeScript, optimized for 
 ## Installation
 
 ```bash
-npm install cephie-ui
+npm install @cephie-studios/ui
 # or
-yarn add cephie-ui
+yarn add @cephie-studios/ui
 # or
-bun add cephie-ui
+bun add @cephie-studios/ui
+```
+
+When you import components (ESM), the library's styles are loaded automatically. If styles don't appear (e.g. with CommonJS or some bundlers), add this once in your app entry (e.g. `_app.tsx`, `layout.tsx`, or `main.tsx`):
+
+```ts
+import '@cephie-studios/ui/styles.css';
 ```
 
 ## Usage
@@ -17,7 +23,7 @@ bun add cephie-ui
 ### Dropdown Component
 
 ```tsx
-import { Dropdown, DropdownItem } from 'cephie-ui';
+import { Dropdown, DropdownItem } from '@cephie-studios/ui';
 
 export default function MyComponent() {
   return (
@@ -32,7 +38,7 @@ export default function MyComponent() {
 ### Button Component
 
 ```tsx
-import { Button } from 'cephie-ui';
+import { Button } from '@cephie-studios/ui';
 
 export default function MyComponent() {
   return (
