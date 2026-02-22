@@ -59,7 +59,7 @@ Import the stylesheet in your root layout. This must be done explicitly — styl
 ```tsx
 // app/layout.tsx
 import './globals.css';
-import '@cephie-studios/ui/styles.css'; // required
+import 'cephie-ui/styles.css'; // required
 
 export default function RootLayout({
   children,
@@ -74,7 +74,7 @@ export default function RootLayout({
 }
 ```
 
-> **Tailwind v4 users:** Instead of importing `styles.css`, add `transpilePackages: ['@cephie-studios/ui']` to `next.config.ts`. This lets Tailwind v4 compile the component sources directly, avoiding any v3/v4 CSS conflicts.
+> **Tailwind v4 users:** Instead of importing `styles.css`, add `transpilePackages: ['cephie-ui']` to `next.config.ts`. This lets Tailwind v4 compile the component sources directly, avoiding any v3/v4 CSS conflicts.
 
 // app/page.tsx
 'use client';
@@ -104,7 +104,7 @@ import Button from 'cephie-ui/components/Button';
 The components are styled with Tailwind CSS. The package ships a pre-built `styles.css` (compiled with Tailwind v3) that must be imported manually in your app entry:
 
 ```ts
-import '@cephie-studios/ui/styles.css';
+import 'cephie-ui/styles.css';
 ```
 
 ### Tailwind v3 projects
@@ -116,7 +116,7 @@ Make sure Tailwind is installed, then include the package output in your `conten
 export default {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
-    './node_modules/@cephie-studios/ui/dist/**/*.js',
+    './node_modules/cephie-ui/dist/**/*.js',
   ],
   theme: { extend: {} },
   plugins: [],
@@ -132,7 +132,7 @@ Skip the `styles.css` import. Add `transpilePackages` to `next.config.ts` instea
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  transpilePackages: ['@cephie-studios/ui'],
+  transpilePackages: ['cephie-ui'],
 };
 
 export default nextConfig;

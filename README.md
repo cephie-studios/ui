@@ -5,27 +5,27 @@ A production-ready React component library built with TypeScript, optimized for 
 ## Installation
 
 ```bash
-npm install @cephie-studios/ui
+npm install cephie-ui
 # or
-yarn add @cephie-studios/ui
+yarn add cephie-ui
 # or
-bun add @cephie-studios/ui
+bun add cephie-ui
 ```
 
 After installing, import the stylesheet **once** in your app entry point (e.g. `layout.tsx`, `_app.tsx`, or `main.tsx`). This is always required — styles are not injected automatically:
 
 ```ts
-import '@cephie-studios/ui/styles.css';
+import 'cephie-ui/styles.css';
 ```
 
-> **Note for Tailwind v4 users:** The bundled `styles.css` is compiled with Tailwind v3. If your app uses Tailwind v4, you can skip the CSS import and instead add `transpilePackages: ['@cephie-studios/ui']` to your `next.config.ts` so Tailwind v4 scans and compiles the component sources directly.
+> **Note for Tailwind v4 users:** The bundled `styles.css` is compiled with Tailwind v3. If your app uses Tailwind v4, you can skip the CSS import and instead add `transpilePackages: ['cephie-ui']` to your `next.config.ts` so Tailwind v4 scans and compiles the component sources directly.
 
 ## Usage
 
 ### Dropdown Component
 
 ```tsx
-import { Dropdown, DropdownItem } from '@cephie-studios/ui';
+import { Dropdown, DropdownItem } from 'cephie-ui';
 
 export default function MyComponent() {
   return (
@@ -40,7 +40,7 @@ export default function MyComponent() {
 ### Button Component
 
 ```tsx
-import { Button } from '@cephie-studios/ui';
+import { Button } from 'cephie-ui';
 
 export default function MyComponent() {
   return (
