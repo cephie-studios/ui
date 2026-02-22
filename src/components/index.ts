@@ -7,6 +7,8 @@ export {
 	NavbarInner,
 	NavbarRow,
 	NavbarBrand,
-	NavbarUserMenu
+	NavbarUserMenu,
+	NavbarLink,
+	NavbarButton
 } from './Navbar';
 export { default as Footer, FooterLinkHeader, FooterLink } from './Footer';

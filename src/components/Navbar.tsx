@@ -6,6 +6,7 @@ import {
 	createContext,
 	useContext,
 	useRef,
+	type ComponentProps,
 	type ReactNode
 } from 'react';
 import Button from './Button';
@@ -16,8 +17,8 @@ const modeClasses: Record<'light' | 'dark', string> = {
 };
 
 const menuClasses: Record<'light' | 'dark', string> = {
-	light: 'bg-white border border-zinc-200 text-zinc-700 shadow-xl ring-1 ring-zinc-900/5',
-	dark: 'bg-zinc-900 border border-zinc-800 text-zinc-300 shadow-2xl ring-1 ring-zinc-950/40'
+	light: 'bg-white border border-zinc-200 shadow-xl ring-1 ring-zinc-900/5',
+	dark: 'bg-zinc-900 border border-zinc-800 shadow-2xl ring-1 ring-zinc-950/40'
 };
 
 const defaultIcons = {
@@ -143,6 +144,46 @@ export function NavbarBrand({
 	);
 }
 
+type NavbarLinkProps = {
+	children?: ReactNode;
+	href: string;
+	newTab?: boolean;
+	className?: string;
+	mode?: 'light' | 'dark';
+};
+
+export function NavbarLink({
+	children,
+	href,
+	newTab = false,
+	className = '',
+	mode
+}: NavbarLinkProps) {
+	const context = useContext(NavbarContext);
+	const currentMode = mode ?? context.mode;
+	const linkClasses =
+		currentMode === 'dark'
+			? 'text-sm font-medium text-zinc-400 hover:text-zinc-50 transition-colors'
+			: 'text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors';
+
+	return (
+		<a
+			href={href}
+			target={newTab ? '_blank' : '_self'}
+			rel={newTab ? 'noopener noreferrer' : undefined}
+			className={`${linkClasses} ${className}`}
+		>
+			{children}
+		</a>
+	);
+}
+
+type NavbarButtonProps = ComponentProps<typeof Button>;
+
+export function NavbarButton({ className, ...props }: NavbarButtonProps) {
+	return <Button navbar className={className} {...props} />;
+}
+
 type NavbarUserMenuItem = {
 	label: string;
 	href?: string;
@@ -191,16 +232,34 @@ export function NavbarUserMenu({
 
 	const triggerClasses =
 		currentMode === 'dark'
-			? 'bg-transparent! text-zinc-50 hover:bg-zinc-900!'
-			: 'bg-transparent! text-zinc-900 hover:bg-zinc-200!';
+			? 'text-zinc-50 hover:bg-zinc-900'
+			: 'text-zinc-900 hover:bg-zinc-100';
+
+	const userNameClasses =
+		currentMode === 'dark'
+			? 'text-sm font-medium text-zinc-50 font-montserrat'
+			: 'text-sm font-medium text-zinc-900 font-montserrat';
+
+	const chevronClasses =
+		currentMode === 'dark' ? 'text-zinc-400' : 'text-zinc-500';
+
+	const menuItemBaseClasses =
+		'flex items-center gap-3 w-full px-4 py-2 rounded-xl text-sm transition-colors text-left';
+	const menuItemDefaultClasses =
+		currentMode === 'dark'
+			? 'text-zinc-300 hover:text-zinc-50 hover:bg-zinc-800'
+			: 'text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100';
+	const menuItemDangerClasses =
+		currentMode === 'dark'
+			? 'text-zinc-300 hover:text-red-400 hover:bg-zinc-800'
+			: 'text-zinc-700 hover:text-red-600 hover:bg-zinc-100';
 
 	return (
 		<div className={`relative ${className}`} ref={menuRef}>
-			<Button
-				variant="secondary"
-				mode={currentMode}
+			<button
+				type="button"
 				onClick={() => setOpen(!open)}
-				className={`px-3! py-2! rounded-xl! shadow-none! border-0! ${triggerClasses} ${buttonClassName}`}
+				className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-colors duration-200 ${triggerClasses} ${buttonClassName}`}
 			>
 				<span className="flex items-center gap-2">
 					{userImage && (
@@ -213,15 +272,11 @@ export function NavbarUserMenu({
 						/>
 					)}
 					{userName && (
-						<span className="text-sm font-medium font-montserrat">
-							{userName}
-						</span>
+						<span className={userNameClasses}>{userName}</span>
 					)}
 					<svg
 						className={`w-4 h-4 transition-transform duration-200 ${
-							currentMode === 'dark'
-								? 'text-zinc-400'
-								: 'text-zinc-500'
+							chevronClasses
 						} ${open ? 'rotate-180' : ''}`}
 						fill="none"
 						stroke="currentColor"
@@ -235,27 +290,16 @@ export function NavbarUserMenu({
 						/>
 					</svg>
 				</span>
-			</Button>
+			</button>
 
 			{open && (
 				<div
-					className={`absolute right-0 mt-2 w-56 rounded-2xl overflow-hidden animate-in fade-in zoom-in duration-200 ${
+					className={`absolute right-0 mt-2 w-48 rounded-2xl overflow-hidden animate-in fade-in zoom-in duration-200 ${
 						menuClasses[currentMode]
 					} ${menuClassName}`}
 				>
 					<div className="py-1 px-1">
 						{items.map((item) => {
-							const baseClasses =
-								'flex items-center gap-3 w-full px-4 py-2 rounded-xl text-sm transition-colors text-left';
-							const dangerClasses =
-								currentMode === 'dark'
-									? 'text-zinc-300 hover:text-red-400 hover:bg-zinc-800'
-									: 'text-zinc-700 hover:text-red-600 hover:bg-zinc-100';
-							const defaultClasses =
-								currentMode === 'dark'
-									? 'text-zinc-300 hover:text-zinc-50 hover:bg-zinc-800'
-									: 'text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100';
-
 							if (item.href) {
 								return (
 									<a
@@ -269,10 +313,10 @@ export function NavbarUserMenu({
 												? 'noopener noreferrer'
 												: undefined
 										}
-										className={`${baseClasses} ${
+										className={`${menuItemBaseClasses} ${
 											item.danger
-												? dangerClasses
-												: defaultClasses
+												? menuItemDangerClasses
+												: menuItemDefaultClasses
 										}`}
 										onClick={() => setOpen(false)}
 									>
@@ -290,10 +334,10 @@ export function NavbarUserMenu({
 										setOpen(false);
 										item.onClick?.();
 									}}
-									className={`${baseClasses} ${
+									className={`${menuItemBaseClasses} ${
 										item.danger
-											? dangerClasses
-											: defaultClasses
+											? menuItemDangerClasses
+											: menuItemDefaultClasses
 									}`}
 								>
 									{item.icon}

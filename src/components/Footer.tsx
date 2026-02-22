@@ -69,7 +69,8 @@ export default function Footer({
 	const classes = modeClasses[mode];
 	const iconSrc = mode === 'dark' ? iconDark : iconLight;
 	const year = new Date().getFullYear();
-	const footerBottomRight = bottomRight ?? `Designed and built by ${title}.`;
+	const footerBottomRight =
+		bottomRight ?? `Designed and built by Cephie Studios.`;
 	const footerCopyright =
 		copyright ?? `© ${year} ${title}. All rights reserved.`;
 
@@ -77,8 +78,8 @@ export default function Footer({
 		<FooterContext.Provider value={{ mode, classes }}>
 			<footer className={classes.footer}>
 				<div className="max-w-7xl mx-auto px-6 py-12">
-					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
-						<div>
+					<div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+						<div className="lg:col-span-4">
 							<div className="flex items-center mb-4">
 								<img
 									src={iconSrc}
@@ -100,9 +101,9 @@ export default function Footer({
 							</p>
 						</div>
 
-						<div></div>
-
-						{children}
+						<div className="lg:col-span-8 flex flex-col sm:flex-row flex-wrap gap-8 justify-start lg:justify-end">
+							{children}
+						</div>
 					</div>
 
 					<div

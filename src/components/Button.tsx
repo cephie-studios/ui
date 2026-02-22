@@ -29,6 +29,7 @@ export default function Button({
 	size = 'md',
 	mode = 'light',
 	href,
+	navbar = false,
 	newTab = false,
 	className = '',
 	style = {},
@@ -41,8 +42,10 @@ export default function Button({
 	size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 	mode?: 'light' | 'dark';
 	href?: string;
+	navbar?: boolean;
 	newTab?: boolean;
 }) {
+	const navbarClasses = navbar ? 'px-4! py-2! rounded-xl! text-xs!' : '';
 	const content = (
 		<button
 			className={`font-semibold shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed border-0 cursor-pointer ${
@@ -55,7 +58,7 @@ export default function Button({
 							: size === 'lg'
 								? 'px-8 py-4 text-base rounded-2xl'
 								: 'px-10 py-5 text-lg rounded-2xl'
-			} ${variantClasses[mode][variant]} ${className}`}
+			} ${variantClasses[mode][variant]} ${className} ${navbarClasses}`}
 			style={style}
 			type={type}
 			disabled={disabled}

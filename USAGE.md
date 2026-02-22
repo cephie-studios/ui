@@ -75,6 +75,7 @@ Props:
 - `size`: `xs` | `sm` | `md` | `lg` | `xl`
 - `mode`: `light` | `dark`
 - `href`: string (renders as link when provided)
+- `navbar`: boolean (appends compact navbar sizing classes)
 - `newTab`: boolean (only used with `href`)
 
 ```tsx
@@ -87,6 +88,9 @@ export default function Actions() {
       <Button variant="secondary">Secondary</Button>
       <Button variant="danger" size="lg">
         Delete
+      </Button>
+      <Button mode="dark" variant="secondary" navbar>
+        Compact
       </Button>
       <Button href="/apply" size="sm">
         Go to Apply
