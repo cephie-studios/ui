@@ -49,12 +49,12 @@ export default function Button({
 				size === 'xs'
 					? 'px-3 py-1.5 text-xs rounded-xl'
 					: size === 'sm'
-						? 'px-4 py-2 text-xs rounded-2xl'
+						? 'px-4 py-2.5 text-sm rounded-2xl'
 						: size === 'md'
-							? 'px-6 py-3 text-sm rounded-2xl'
+							? 'px-6 py-3.5 text-sm rounded-2xl'
 							: size === 'lg'
-								? 'px-8 py-4 text-base rounded-3xl'
-								: 'px-10 py-5 text-lg rounded-3xl'
+								? 'px-8 py-4 text-base rounded-2xl'
+								: 'px-10 py-5 text-lg rounded-2xl'
 			} ${variantClasses[mode][variant]} ${className}`}
 			style={style}
 			type={type}
