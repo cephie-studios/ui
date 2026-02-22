@@ -121,7 +121,7 @@ export default function Dropdown({
 					className={`w-full border outline-none transition-colors cursor-pointer flex items-center justify-between text-left ${sizeStyle.trigger} ${
 						mode === 'light'
 							? 'bg-zinc-50 border-zinc-200 text-zinc-900 focus:bg-white'
-							: 'bg-zinc-900 border-zinc-800 text-zinc-50 focus:bg-zinc-900'
+							: 'bg-zinc-950 border-zinc-800 text-zinc-50 focus:bg-zinc-900'
 					}`}
 					aria-haspopup="listbox"
 					aria-expanded={isOpen}
@@ -151,7 +151,7 @@ export default function Dropdown({
 						className={`absolute z-50 w-full mt-2 border overflow-hidden ${sizeStyle.panel} ${
 							mode === 'light'
 								? 'bg-white border-zinc-200 shadow-xl'
-								: 'bg-zinc-900 border-zinc-800 shadow-2xl backdrop-blur-xl'
+								: 'bg-zinc-950 border-zinc-800 shadow-2xl backdrop-blur-xl'
 						}`}
 					>
 						<div
