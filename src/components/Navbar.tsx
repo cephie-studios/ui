@@ -262,7 +262,7 @@ export function NavbarUserMenu({
 			<button
 				type="button"
 				onClick={() => setOpen(!open)}
-				className={`flex items-center gap-2 px-3 py-2 rounded-xl ${buttonClassName}`}
+				className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium transition-colors duration-200 ${buttonClassName}`}
 			>
 				<span className="flex items-center gap-2">
 					{userImage && (
@@ -271,7 +271,7 @@ export function NavbarUserMenu({
 							alt="Profile"
 							width={28}
 							height={28}
-							className="rounded-full"
+							className="size-7 shrink-0 rounded-full object-cover"
 						/>
 					)}
 					{userName && (
