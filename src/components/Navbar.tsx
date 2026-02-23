@@ -114,7 +114,11 @@ export function NavbarActions({
 	children,
 	className = ''
 }: NavbarActionsProps) {
-	return <div className={`flex gap-2 ${className}`}>{children}</div>;
+	return (
+		<div className={`flex items-center gap-2 ${className}`}>
+			{children}
+		</div>
+	);
 }
 
 type NavbarRightMobileProps = {
@@ -293,41 +297,37 @@ export function NavbarUserMenu({
 				: 'hover:bg-zinc-100';
 
 	return (
-		<div className={`relative ${className}`} ref={menuRef}>
+		<div className={`relative shrink-0 ${className}`} ref={menuRef}>
 			<button
 				type="button"
 				onClick={() => setOpen(!open)}
-				className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium transition-colors duration-200 ${triggerHover} ${buttonClassName}`}
+				className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-colors duration-200 ${triggerHover} ${buttonClassName}`}
 			>
-				<span className="flex items-center gap-2">
-					{userImage && (
-						<img
-							src={userImage}
-							alt="Profile"
-							width={28}
-							height={28}
-							className="size-7 shrink-0 rounded-full object-cover"
-						/>
-					)}
-					{userName && (
-						<span className={userNameClasses}>{userName}</span>
-					)}
-					<svg
-						className={`w-4 h-4 transition-transform duration-200 ${
-							chevronClasses
-						} ${open ? 'rotate-180' : ''}`}
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							strokeWidth="2"
-							d="M19 9l-7 7-7-7"
-						/>
-					</svg>
-				</span>
+				{userImage && (
+					<img
+						src={userImage}
+						alt="Profile"
+						width={28}
+						height={28}
+						className="rounded-full"
+					/>
+				)}
+				{userName && (
+					<span className={userNameClasses}>{userName}</span>
+				)}
+				<svg
+					className={`w-4 h-4 shrink-0 transition-transform duration-200 ${chevronClasses} ${open ? 'rotate-180' : ''}`}
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth="2"
+						d="M19 9l-7 7-7-7"
+					/>
+				</svg>
 			</button>
 
 			{open && (
