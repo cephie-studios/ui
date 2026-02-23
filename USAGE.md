@@ -53,6 +53,7 @@ import {
 The `Background` component renders a decorative gradient shape. It is positioned absolutely and ignores pointer events.
 
 Props:
+- `mode` (`'light'` | `'dark'`): Light uses a brighter gradient at 30% opacity; dark uses a subtler gradient at 15% opacity for use on dark backgrounds (e.g. `bg-zinc-950`).
 - `className` (string): Extra classes for positioning or opacity.
 - `style` (React.CSSProperties): Override the gradient or shape style.
 
@@ -62,7 +63,7 @@ import { Background } from 'cephie-ui';
 export default function Hero() {
   return (
     <section className="relative overflow-hidden py-20">
-      <Background className="opacity-40" />
+      <Background mode="dark" />
       <div className="relative z-10">Content here</div>
     </section>
   );
