@@ -291,17 +291,12 @@ export function NavbarUserMenu({
 			? 'text-zinc-300 hover:text-red-400 hover:bg-zinc-800'
 			: 'text-zinc-700 hover:text-red-600 hover:bg-zinc-100';
 
-		const triggerHover =
-			currentMode === 'dark'
-				? 'hover:bg-zinc-900'
-				: 'hover:bg-zinc-100';
-
 	return (
 		<div className={`relative shrink-0 ${className}`} ref={menuRef}>
 			<button
 				type="button"
 				onClick={() => setOpen(!open)}
-				className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-colors duration-200 ${triggerHover} ${buttonClassName}`}
+				className={`flex items-center gap-2 px-3 py-2 rounded-xl ${buttonClassName}`}
 			>
 				{userImage && (
 					<img

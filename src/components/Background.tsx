@@ -10,11 +10,14 @@ export default function Background({
 	return (
 		<div
 			aria-hidden="true"
-			className={`absolute inset-0 z-0 pointer-events-none flex items-center justify-center blur-3xl ${className}`}
+			className={`absolute inset-0 z-0 pointer-events-none overflow-hidden blur-3xl ${className}`}
 		>
 			<div
-				className="absolute left-1/2 top-0 -translate-x-1/2 rotate-[20deg] opacity-30"
+				className="absolute opacity-30"
 				style={{
+					left: '50%',
+					top: '50%',
+					transform: 'translate(-50%, -50%) rotate(20deg)',
 					width: '60rem',
 					aspectRatio: '1200/700',
 					background:
