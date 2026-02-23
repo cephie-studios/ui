@@ -6,6 +6,8 @@ export {
 	default as Navbar,
 	NavbarLeft,
 	NavbarRight,
+	NavbarRightMobile,
+	NavbarActions,
 	NavbarBrand,
 	NavbarUserMenu,
 	NavbarLink,

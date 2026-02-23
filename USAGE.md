@@ -40,6 +40,7 @@ import {
   Navbar,
   NavbarLeft,
   NavbarRight,
+  NavbarActions,
   NavbarBrand,
   NavbarLink,
   NavbarButton,
@@ -156,22 +157,28 @@ export default function LoadingState() {
 
 ## Navbar
 
-Single row like the dashboard: brand on the left, links/actions on the right. `Navbar` wraps everything (fixed bar + inner max-width + flex row). Put `NavbarLeft` and `NavbarRight` as direct children.
+Single row like the dashboard/app navbars: brand on the left, links and actions on the right. Layout and spacing match the reference navbars (same `h-16`, `space-x-8` between links and the actions group, `gap-2` between buttons and user menu).
+
+- Put `NavbarLeft` and `NavbarRight` as direct children of `Navbar`.
+- Put all **links** as direct children of `NavbarRight` (they get `space-x-8`).
+- Wrap **buttons and user menu** in `NavbarActions` so they sit with `gap-2` (same as dashboard/app).
 
 Props:
 - `Navbar`: `mode`, `className`
-- `NavbarLeft`: `className` — left side, `flex items-center` (wrap `NavbarBrand` here)
+- `NavbarLeft`: `className` — left side, `flex items-center`
 - `NavbarRight`: `className` — right side, `hidden md:flex items-center space-x-8`
+- `NavbarActions`: `className` — wrapper for buttons + user menu, `flex gap-2` (use for correct spacing)
 - `NavbarBrand`: `title`, `href`, `iconLight`, `iconDark`, `iconAlt`, `iconSize`
 - `NavbarLink`: `href`, `newTab`, `mode`
-- `NavbarButton`: same props as `Button` (automatically applies `navbar` sizing)
-- `NavbarUserMenu`: `userName`, `userImage`, `items` (links or actions), `mode`
+- `NavbarButton`: same props as `Button` (navbar sizing applied)
+- `NavbarUserMenu`: `userName`, `userImage`, `items`, `mode`
 
 ```tsx
 import {
   Navbar,
   NavbarLeft,
   NavbarRight,
+  NavbarActions,
   NavbarBrand,
   NavbarLink,
   NavbarButton,
@@ -188,7 +195,7 @@ export default function AppNavbar() {
         <NavbarLink href="/docs" mode="dark">
           Docs
         </NavbarLink>
-        <div className="flex gap-2">
+        <NavbarActions>
           <NavbarButton mode="dark" href="/apply">
             Apply
           </NavbarButton>
@@ -201,7 +208,7 @@ export default function AppNavbar() {
               { label: 'Sign out', onClick: () => {}, danger: true }
             ]}
           />
-        </div>
+        </NavbarActions>
       </NavbarRight>
     </Navbar>
   );

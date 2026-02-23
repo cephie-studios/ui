@@ -105,6 +105,36 @@ export function NavbarRight({ children, className = '' }: NavbarRightProps) {
 	);
 }
 
+type NavbarActionsProps = {
+	children?: ReactNode;
+	className?: string;
+};
+
+export function NavbarActions({
+	children,
+	className = ''
+}: NavbarActionsProps) {
+	return <div className={`flex gap-2 ${className}`}>{children}</div>;
+}
+
+type NavbarRightMobileProps = {
+	children?: ReactNode;
+	className?: string;
+};
+
+export function NavbarRightMobile({
+	children,
+	className = ''
+}: NavbarRightMobileProps) {
+	return (
+		<div
+			className={`md:hidden flex items-center ${className}`}
+		>
+			{children}
+		</div>
+	);
+}
+
 type NavbarBrandProps = {
 	title?: string;
 	href?: string;
@@ -257,12 +287,17 @@ export function NavbarUserMenu({
 			? 'text-zinc-300 hover:text-red-400 hover:bg-zinc-800'
 			: 'text-zinc-700 hover:text-red-600 hover:bg-zinc-100';
 
+		const triggerHover =
+			currentMode === 'dark'
+				? 'hover:bg-zinc-900'
+				: 'hover:bg-zinc-100';
+
 	return (
 		<div className={`relative ${className}`} ref={menuRef}>
 			<button
 				type="button"
 				onClick={() => setOpen(!open)}
-				className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium transition-colors duration-200 ${buttonClassName}`}
+				className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium transition-colors duration-200 ${triggerHover} ${buttonClassName}`}
 			>
 				<span className="flex items-center gap-2">
 					{userImage && (
@@ -297,7 +332,7 @@ export function NavbarUserMenu({
 
 			{open && (
 				<div
-					className={`absolute right-0 top-full z-100 mt-2 w-48 rounded-2xl overflow-hidden animate-in fade-in zoom-in duration-200 py-1 px-1 ${
+					className={`absolute right-0 top-full mt-2 w-48 rounded-2xl overflow-hidden animate-in fade-in zoom-in duration-200 py-1 px-1 ${
 						menuClasses[currentMode]
 					} ${menuClassName}`}
 				>
