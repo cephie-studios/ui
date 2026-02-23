@@ -12,13 +12,21 @@ yarn add cephie-ui
 bun add cephie-ui
 ```
 
-After installing, import the stylesheet **once** in your app entry point (e.g. `layout.tsx`, `_app.tsx`, or `main.tsx`). This is always required — styles are not injected automatically:
+After installing, you can apply the required setup automatically:
+
+```bash
+npx cephie-ui init
+```
+
+This will add the stylesheet import to your app entry (e.g. `layout.tsx`, `_app.tsx`, or `main.tsx`), or for **Tailwind v4** projects it will add `transpilePackages: ['cephie-ui']` to your `next.config.ts` so you can skip the CSS import.
+
+**Manual setup:** Import the stylesheet **once** in your app entry point. This is always required unless you use Tailwind v4 (see below):
 
 ```ts
 import 'cephie-ui/styles.css';
 ```
 
-> **Note for Tailwind v4 users:** The bundled `styles.css` is compiled with Tailwind v3. If your app uses Tailwind v4, you can skip the CSS import and instead add `transpilePackages: ['cephie-ui']` to your `next.config.ts` so Tailwind v4 scans and compiles the component sources directly.
+> **Note for Tailwind v4 users:** The bundled `styles.css` is compiled with Tailwind v3. If your app uses Tailwind v4, you can skip the CSS import and instead add `transpilePackages: ['cephie-ui']` to your `next.config.ts` so Tailwind v4 scans and compiles the component sources directly. Run `npx cephie-ui init` to do this automatically.
 
 ## Usage
 

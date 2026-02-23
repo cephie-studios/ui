@@ -7,6 +7,7 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "bin": "./bin/cephie-ui.mjs",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -16,7 +17,8 @@
     "./styles.css": "./dist/styles.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "bin"
   ],
   "scripts": {
     "build": "bun run src/build.ts && tsc -p tsconfig.build.json",
