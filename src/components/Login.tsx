@@ -1,6 +1,11 @@
-import React, { type ReactNode } from 'react';
+'use client';
+
+import React, { useState, type ReactNode } from 'react';
 import Background from './Background';
 import Button from './Button';
+import Rail from './Rail';
+
+const inset = 'px-6 md:px-10 lg:px-12';
 
 const modeClasses: Record<
 	'light' | 'dark',
@@ -9,33 +14,67 @@ const modeClasses: Record<
 		title: string;
 		subtitle: string;
 		card: string;
-		legalText: string;
+		legal: string;
 		legalLink: string;
+		checkbox: string;
 	}
 > = {
 	light: {
 		page: 'bg-white',
-		title: 'text-zinc-900',
-		subtitle: 'text-zinc-600',
-		card: 'border-zinc-200 bg-white/80',
-		legalText: 'text-zinc-500',
-		legalLink: 'text-zinc-600 underline underline-offset-4 hover:text-zinc-900'
+		title: 'text-[#0d0d0b]',
+		subtitle: 'text-[#5c5a55]',
+		card: 'border border-[#e5e5e5] bg-white',
+		legal: 'text-[#5c5a55]',
+		legalLink:
+			'text-[#0d0d0b] underline underline-offset-4 decoration-[#c8c6c1] hover:decoration-[#0d0d0b]',
+		checkbox: 'mt-1 size-4 shrink-0 rounded border-[#c8c6c1] accent-[#0d0d0b] focus:outline-none focus:ring-2 focus:ring-[#0d0d0b]/25'
 	},
 	dark: {
-		page: 'bg-zinc-950',
-		title: 'text-zinc-50',
-		subtitle: 'text-zinc-400',
-		card: 'border-zinc-800 bg-zinc-900/50',
-		legalText: 'text-zinc-400',
-		legalLink: 'text-zinc-400 underline underline-offset-4 hover:text-zinc-300'
+		page: 'bg-[#0d0d0b]',
+		title: 'text-white',
+		subtitle: 'text-[#c8c6c1]',
+		card: 'border border-[#2a2a28] bg-[#141412]',
+		legal: 'text-[#a8a69f]',
+		legalLink:
+			'text-white underline underline-offset-4 decoration-[#5c5a55] hover:decoration-white',
+		checkbox:
+			'mt-1 size-4 shrink-0 rounded border-[#5c5a55] accent-white focus:outline-none focus:ring-2 focus:ring-white/30'
 	}
 };
 
-const LEGAL_LINKS = [
-	{ href: 'https://cephie.app/legal/terms', label: 'Terms of Use' },
-	{ href: 'https://cephie.app/legal/privacy', label: 'Privacy Policy' },
-	{ href: 'https://cephie.app/legal/cookies', label: 'Cookies Policy' }
-] as const;
+export type LoginLegalLinks = {
+	termsHref: string;
+	termsLabel?: string;
+	privacyHref: string;
+	privacyLabel?: string;
+	cookiesHref: string;
+	cookiesLabel?: string;
+};
+
+const DEFAULT_LEGAL: LoginLegalLinks = {
+	termsHref: 'https://cephie.app/legal/terms',
+	termsLabel: 'Terms of Service',
+	privacyHref: 'https://cephie.app/legal/privacy',
+	privacyLabel: 'Privacy Policy',
+	cookiesHref: 'https://cephie.app/legal/cookies',
+	cookiesLabel: 'Cookie Policy'
+};
+
+export type LoginProps = {
+	mode?: 'light' | 'dark';
+	title: string;
+	subtitle: string;
+	onSignIn: () => void;
+	icon?: ReactNode;
+	children?: ReactNode;
+	className?: string;
+	legal?: Partial<LoginLegalLinks>;
+	backgroundImageSrc?: string;
+	backgroundImageAlt?: string;
+	backgroundImageClassName?: string;
+	backgroundBlurClassName?: string;
+	backgroundOverlayClassName?: string | null;
+};
 
 export default function Login({
 	mode = 'light',
@@ -44,60 +83,113 @@ export default function Login({
 	onSignIn,
 	icon,
 	children,
-	className = ''
-}: {
-	mode?: 'light' | 'dark';
-	title: string;
-	subtitle: string;
-	onSignIn: () => void;
-	icon?: ReactNode;
-	children?: ReactNode;
-	className?: string;
-}) {
+	className = '',
+	legal: legalProp,
+	backgroundImageSrc,
+	backgroundImageAlt = '',
+	backgroundImageClassName,
+	backgroundBlurClassName = '',
+	backgroundOverlayClassName
+}: LoginProps) {
+	const [accepted, setAccepted] = useState(false);
 	const c = modeClasses[mode];
+	const legal = { ...DEFAULT_LEGAL, ...legalProp };
+
+	const resolvedOverlay =
+		backgroundOverlayClassName !== undefined && backgroundOverlayClassName !== null
+			? backgroundOverlayClassName || undefined
+			: backgroundImageSrc
+				? 'bg-white/60'
+				: undefined;
 
 	return (
-		<div
-			className={`flex min-h-screen flex-col items-center justify-center px-6 ${c.page} ${className}`}
+		<section
+			className={`relative isolate min-h-screen overflow-hidden ${c.page} ${className}`.trim()}
 		>
+			<Background
+				mode={mode}
+				imageSrc={backgroundImageSrc}
+				imageAlt={backgroundImageAlt}
+				imageClassName={backgroundImageClassName}
+				blurClassName={backgroundBlurClassName}
+				overlayClassName={resolvedOverlay}
+			/>
+
 			{children}
-			<Background mode={mode} />
-			<div className={`relative z-10 mb-10 text-center ${c.title}`}>
-				<h1 className="font-montserrat text-4xl">{title}</h1>
-				<p className={`font-montserrat mt-2 ${c.subtitle}`}>{subtitle}</p>
-			</div>
 
-			<div
-				className={`relative z-10 w-full max-w-sm rounded-3xl border p-6 backdrop-blur-sm ${c.card}`}
-			>
-				<Button
-					mode={mode}
-					onClick={onSignIn}
-					className="flex w-full items-center justify-center gap-3 font-montserrat font-semibold"
+			<div className="relative z-10 flex min-h-screen flex-col">
+				<Rail
+					variant={mode === 'dark' ? 'dark' : 'light'}
+					className={`flex flex-1 items-center justify-center !border-t-0 sm:!border-t-0 ${inset} py-24 md:py-32`}
 				>
-					{icon}
-					<span>Sign in with Discord</span>
-				</Button>
+					<div
+						className={`w-full max-w-xl p-8 text-center md:p-10 ${c.card}`}
+					>
+						<h1
+							className={`text-3xl font-medium tracking-tight md:text-[1.75rem] ${c.title}`}
+						>
+							{title}
+						</h1>
+						<p className={`mt-4 text-[15px] leading-relaxed ${c.subtitle}`}>
+							{subtitle}
+						</p>
 
-				<div className={`mt-8 text-center font-montserrat text-xs ${c.legalText}`}>
-					<p>By signing in, you agree to our</p>
-					<div className="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-						{LEGAL_LINKS.map((link, i) => (
-							<React.Fragment key={link.href}>
-								{i > 0 && <span>•</span>}
+						<label
+							className={`mt-8 flex cursor-pointer items-start gap-3 text-left font-medium ${c.legal}`}
+						>
+							<input
+								type="checkbox"
+								checked={accepted}
+								onChange={(e) => setAccepted(e.target.checked)}
+								className={c.checkbox}
+							/>
+							<span className="text-[13px] leading-snug">
+								I have read and agree to the{' '}
 								<a
-									href={link.href}
-									rel="noopener noreferrer"
+									href={legal.termsHref}
 									target="_blank"
+									rel="noopener noreferrer"
 									className={c.legalLink}
 								>
-									{link.label}
+									{legal.termsLabel}
 								</a>
-							</React.Fragment>
-						))}
+								, the{' '}
+								<a
+									href={legal.privacyHref}
+									target="_blank"
+									rel="noopener noreferrer"
+									className={c.legalLink}
+								>
+									{legal.privacyLabel}
+								</a>
+								, and the{' '}
+								<a
+									href={legal.cookiesHref}
+									target="_blank"
+									rel="noopener noreferrer"
+									className={c.legalLink}
+								>
+									{legal.cookiesLabel}
+								</a>
+								.
+							</span>
+						</label>
+
+						<div className="mt-8 flex justify-center">
+							<Button
+								type="button"
+								variant="dark"
+								disabled={!accepted}
+								onClick={onSignIn}
+								className="min-w-56 justify-center disabled:cursor-not-allowed disabled:opacity-45"
+							>
+								{icon}
+								<span>Continue with Discord</span>
+							</Button>
+						</div>
 					</div>
-				</div>
+				</Rail>
 			</div>
-		</div>
+		</section>
 	);
 }
